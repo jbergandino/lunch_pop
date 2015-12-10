@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  subtitle: MyString
+  description: MyString
+  price: 1
+  vendor_id: 1
+  expiration: 2015-12-10 15:30:21
+
+two:
+  title: MyString
+  subtitle: MyString
+  description: MyString
+  price: 1
+  vendor_id: 1
+  expiration: 2015-12-10 15:30:21

@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LunchPop</title>
+  <title>LunchPop!</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+	<ul>
+		<% if session[:user_id] %>
+			<li><%= link_to 'Logout', logout_path%></li>								
+			<li><%= link_to 'Preferences', edit_user_path(session[:user_id]) %></li>
+		<% else %>
+			<li><%= link_to 'Login', login_path%></li>
+			<li><%= link_to 'Create Account', new_user_path%></li>
+		<% end %>
+	</ul>
 <%= yield %>
 
 </body>

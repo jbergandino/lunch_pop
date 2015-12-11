@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'sessions/login'
+
   # get 'orders/show'
 
   # get 'cust_cards/show'
@@ -14,6 +16,11 @@ Rails.application.routes.draw do
   # get 'users/new'
 
   # get 'products/show'
+  root 'products#show'
+
+  resources :sessions  
+  get 'login', to: 'sessions#login'
+  get 'logout', to: 'sessions#destroy'
 
   resources :products
   resources :users

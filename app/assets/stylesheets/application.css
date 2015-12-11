@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+
+.signup_button {
+	width: 200px;
+	background-color: orange;
+}

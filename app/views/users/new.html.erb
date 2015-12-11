@@ -1,2 +1,33 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<h1>Sign Up Below!</h1>
+<br>
+
+<%= form_for @user do |f| %>
+
+  <%= f.label :fname, "First Name:" %>
+  <%= f.text_field :fname  %>
+  
+  <%= f.label :lname, "Last Name:" %>
+  <%= f.text_field :lname  %>
+
+  <%= f.label :username, "Username:" %>
+  <%= f.text_field :username  %>
+
+  <%= f.label :email, "Email:" %>
+  <%= f.text_field :email  %>
+
+  <br>
+  <br>
+  <%= f.label :password, "Password:" %>
+  <%= f.password_field :password  %>
+  
+  <%= f.label :password_confirmation, "Confirm Password:" %>
+  <%= f.password_field :password_confirmation  %>
+  
+  <%= f.label :phone, "Phone:" %>
+  <%= f.text_field :phone  %>
+
+  <%= f.submit "Sign Up!", :class => "signup_button" %>
+<% end %>
+
+<p><%= flash[:alert] %></p>
+

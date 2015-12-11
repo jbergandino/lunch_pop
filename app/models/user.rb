@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :products
   has_many :cust_cards
   has_many :orders
-  belongs_to :admin
+  has_many :products, through: :orders
+
 
   #validates :email, presence: true
   validates :email, :presence => {message: "Field is Empty, Please Complete All Fields!"}

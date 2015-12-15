@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   
   def show
     @product = Product.find(params[:id])
+    @expiration = @product.expiration
   end
   
   def new

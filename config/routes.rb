@@ -16,11 +16,13 @@ Rails.application.routes.draw do
   # get 'users/new'
 
   # get 'products/show'
-  root 'products#show'
+  root 'products#index'
 
   resources :sessions  
   get 'login', to: 'sessions#login'
   get 'logout', to: 'sessions#destroy'
+  #get 'vendorlogin', to: 'sessions#vendorCreate', as: 'vendorlogin_path'
+  #, :url => vendorlogin_path, method: :post
 
   resources :products
   resources :users

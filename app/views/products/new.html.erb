@@ -1,0 +1,39 @@
+<h1>Post A New Deal!</h1>
+<br>
+
+<%= form_for @product do |f| %>
+
+  <%= f.label :title, "Food Title:" %>
+  <%= f.text_field :title  %>
+  
+  <%= f.label :subtitle, "Food Subtitle:" %>
+  <%= f.text_field :subtitle  %>
+
+  <%= f.label :description, "Food Description:" %>
+  <%= f.text_field :description  %>
+
+  <br>
+  <br>
+  <%= f.label :expiration, "Deal Expires in 1 Hour", :value => true  %>
+  <%= f.radio_button :expiration, true, :checked => true %>
+  <br>
+  <%= f.label :expiration, "Deal Expires in 30 Minutes", :value => false %>
+  <%= f.radio_button :expiration, false %>
+  
+  <br> 
+  <br>
+  
+  <%= f.label :price, "Price:" %>
+  <%= f.number_field :price  %>
+  <br>
+  <br>
+  <%= f.label :counter, "Total Deals Offered:" %>
+  <%= f.number_field :counter  %>
+  <br>
+  <br>
+
+  <%= f.submit "Post Product!", :class => "signup_button" %>
+<% end %>
+
+
+<p><%= flash[:alert] %></p>

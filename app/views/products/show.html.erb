@@ -1,2 +1,8 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h1><%= @product.title %></h1>
+<h2><%= @product.subtitle %></h2>
+<br>
+<h4>Description: <%= @product.description %></h4>
+<h4>Price: <%= @product.price %></h4>
+<h4>Expiration: <%= @product.expiration %></h4>
+
+<%= link_to 'Add to Lunch Cart!', order_path(@product.id), method: :post %>

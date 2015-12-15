@@ -1,0 +1,16 @@
+<% if session[:user_id] %>
+	<% if User.where(id:session[:user_id]).first.lname=="placeholdlname"%>
+		<h1>Vendor Account View - Products#show - <%= User.where(id:session[:user_id]).first.username %></h1>
+	<% else %>
+		<h1>Customer Account View - Products#show - <%= User.where(id:session[:user_id]).first.username %></h1>
+	<% end %>
+	<p>Find me in app/views/products/show.html.erb</p>
+<% else %>
+	<h1>Not Logged In - Products#show</h1>
+<% end %>
+
+<% @product.each do |t| %>
+	<% title = t["title"] %>
+	<p><%= link_to "#{title}", product_path(t.id) %></p>
+
+<% end %>

@@ -1,6 +1,6 @@
-<h1>EDIT ACCOUNT</h1>
+<h1>EDIT VENDOR ACCOUNT</h1>
 
-<%= form_for @user, html: { multipart: true } do |f|  %>
+<%= form_for @vendor, html: { multipart: true } do |f|  %>
 
 <p>
 	<%= f.label :username  %>
@@ -36,4 +36,4 @@
 <br>
 <br>
 <br>
-<%= link_to 'Delete My Account', user_path(@user), :method => :delete %>
+<%= link_to 'Delete My Account', user_path(@vendor), :method => :delete %>

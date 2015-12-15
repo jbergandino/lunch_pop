@@ -9,12 +9,19 @@
 <body>
 
 	<ul>
+		<li><%= link_to 'Home', root_path%></li>
 		<% if session[:user_id] %>
-			<li><%= link_to 'Logout', logout_path%></li>								
-			<li><%= link_to 'Preferences', edit_user_path(session[:user_id]) %></li>
+				<li><%= link_to 'Logout', logout_path%></li>
+			<% if User.where(id:session[:user_id]).first.lname=="placeholdlname"%>
+				<li><%= link_to 'Preferences', edit_vendor_path(session[:user_id]) %></li>
+				<li><%= link_to 'Post A Deal!', new_product_path%></li>				
+			<% else %>
+				<li><%= link_to 'Preferences', edit_user_path(session[:user_id]) %></li>
+			<% end %>
 		<% else %>
-			<li><%= link_to 'Login', login_path%></li>
-			<li><%= link_to 'Create Account', new_user_path%></li>
+			<li><%= link_to 'Create Customer Account', new_user_path%></li>
+			<li><%= link_to 'Create Vendor Account', new_vendor_path%></li>
+			<li><%= link_to 'Login!', login_path%></li>
 		<% end %>
 	</ul>
 <%= yield %>

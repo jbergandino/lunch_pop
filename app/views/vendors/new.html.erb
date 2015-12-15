@@ -1,0 +1,42 @@
+<h1>Vendor Sign Up Below!</h1>
+<br>
+
+<%= form_for @vendor do |f| %>
+
+  <%= f.label :bname, "Business Name:" %>
+  <%= f.text_field :bname  %>
+  
+  <%= f.label :contact, "Primary Contact:" %>
+  <%= f.text_field :contact  %>
+
+  <%= f.label :address, "Address:" %>
+  <%= f.text_field :address  %>
+
+  <%= f.label :city, "City:" %>
+  <%= f.text_field :city  %>
+
+  <%= f.label :zip, "Zip Code:" %>
+  <%= f.text_field :zip  %>
+
+  <%= f.label :username, "Username:" %>
+  <%= f.text_field :username  %>
+
+  <%= f.label :email, "Email:" %>
+  <%= f.text_field :email  %>
+
+  <br>
+  <br>
+  <%= f.label :password, "Password:" %>
+  <%= f.password_field :password  %>
+  
+  <%= f.label :password_confirmation, "Confirm Password:" %>
+  <%= f.password_field :password_confirmation  %>
+  
+  <%= f.label :phone, "Phone:" %>
+  <%= f.text_field :phone  %>
+
+  <%= f.submit "Sign Up!", :class => "signup_button" %>
+<% end %>
+
+<p><%= flash[:alert] %></p>
+

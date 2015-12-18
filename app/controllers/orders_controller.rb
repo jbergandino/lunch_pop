@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   def new
   	@order = Order.new
-  	#cookies[:cart_product] = Product.find(params[:id])
+  	#cookies[:cart_product] = Product.find(params[:id]) 
   end
 
   def create

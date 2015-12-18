@@ -34,15 +34,26 @@ class MyproductsController < ApplicationController
     product = Myproduct.new(title:title, subtitle:subtitle, description:description, 
     	expiration:expires, price:price, counter:counter, vendor_id: session[:user_id])
 
-    if product.save
+    spreeproduct = Spree::Product.new(name:title, price:price, description:description, 
+      shipping_category_id:1, available_on:'2015-12-10 00:00:00', expiration:expires, counter:counter)
+
+    if product.save && spreeproduct.save
       flash[:alert] = "New Product Created!"
       redirect_to '/home'
     else
       if product.errors.full_messages.any?
         # Reverse Array so it starts with the first error rather than last
         revErrors = product.errors.full_messages.reverse
-        for i in 0..product.errors.full_messages.length-1 
-          flash[:alert] = revErrors[i]
+        spreeErrors = spreeproduct.errors.full_messages.reverse
+        if product.errors
+          for i in 0..product.errors.full_messages.length-1 
+            flash[:alert] = revErrors[i]
+          end
+        end
+        if spreeproduct.errors
+          for i in 0..spreeproduct.errors.full_messages.length-1 
+            flash[:alert] = spreeErrors[i]
+          end
         end
       end
       redirect_to new_myproduct_path   

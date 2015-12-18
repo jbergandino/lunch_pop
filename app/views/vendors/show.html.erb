@@ -1,10 +1,68 @@
+<head>
+	<link rel="stylesheet" href="assets/flipclock.css">
+	<style type="text/css">
+		.flip-clock-wrapper {
+			  font: normal 11px "Helvetica Neue", Helvetica, sans-serif;
+			  -webkit-user-select: none;
+			  text-align: center;
+			  position: relative;
+			  margin: 1em;
+			  zoom: 35%;
+ 			}
+	</style>
+
+</head>
+
 <h1><%= @thisUser %>'s Deals</h1>
 <% @thisProducts.each do |t| %>
+
+	<% secondsLeft = t.expiration.to_time.to_i - Time.now.to_i %>
+	<% if secondsLeft <= 0 %>
+		<% secondsLeft = 0 %>
+	<% end %>
 	<% if @now > t.expiration  %>
 		<% expirationStatus = "Expired" %>
 	<% else %>
 		<% expirationStatus = "Active" %>
 	<% end %>
-	<h3><%= link_to t.title, myproduct_path(t.id) %> - Current Status: <%= expirationStatus %></h3>
+	<h3><%= link_to t.title, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
+	<h3>Deals Left: <%= t.counter %></h3>
+	<% tempClassName = t.title %>
+	<div class="<%= tempClassName %>" style="margin:2em;"></div>
+	<script type="text/javascript">
+		var clock;
 
+		$(document).ready(function() {
+						
+			// Grab the current date
+			var currentDate = new Date();
+			//var expTime = new Date(<%= t.expiration %>);
+
+			// Due Date - year, month, day, hours, minutes, seconds, milliseconds
+			var futureDate  = new Date(currentDate.getFullYear(), 11, 22,11,59,59);
+
+			// Calculate the difference in seconds between the future and current date
+			var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+			//console.log(expTime);
+
+			// Instantiate a coutdown FlipClock
+			clock = $(".<%= tempClassName %>").FlipClock(<%= secondsLeft %>, {
+				clockFace: 'DailyCounter',
+				countdown: true
+			});
+		});
+	</script>
+	<hr>
 <% end %>
+	
+
+
+
+
+
+
+
+
+
+
+

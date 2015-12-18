@@ -1,6 +1,10 @@
-<h1>My Deals</h1>
+<h1><%= @thisUser %>'s Deals</h1>
 <% @thisProducts.each do |t| %>
-
-	<h3><%= link_to t.title, myproduct_path(t.id) %></h3>
+	<% if @now > t.expiration  %>
+		<% expirationStatus = "Expired" %>
+	<% else %>
+		<% expirationStatus = "Active" %>
+	<% end %>
+	<h3><%= link_to t.title, myproduct_path(t.id) %> - Current Status: <%= expirationStatus %></h3>
 
 <% end %>

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def new
     if session[:user_id]
-      redirect_to root_path
+      redirect_to '/home'
     end
     @user = User.new
   end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       zip:"placeholdzip", username:username, email:emailPlaceholder, password:userPlaceholder,password_confirmation:userPlaceholder, 
       phone:"111-111-1111", vend:"true") 
       flash[:alert] = "New User Created, Please Login"
-      redirect_to login_path
+      redirect_to mylogin_path
     else
       if user.errors.full_messages.any?
         # user.errors.full_messages.each do |message| 
@@ -73,6 +73,6 @@ class UsersController < ApplicationController
     #@user.delete
     session[:user_id] = nil
     flash[:notice] = 'User Deleted!'
-    redirect_to root_path
+    redirect_to '/home'
   end
 end

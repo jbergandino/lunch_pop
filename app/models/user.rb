@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :cust_cards
   has_many :orders
-  has_many :products, through: :orders
+  has_many :myproducts, through: :orders
 
   validates :fname, :presence => {message: "Field is Empty, Please Complete All Fields!"}
   validates :lname, :presence => {message: "Field is Empty, Please Complete All Fields!"}

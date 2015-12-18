@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
 
+  get 'myproducts/index'
+
+  get 'myproducts/new'
+
+  get 'myproducts/show'
+
   # This line mounts Spree's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
   #
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
-  mount Spree::Core::Engine, :at => '/'
+  # mount Spree::Core::Engine, :at => '/'
+   mount Spree::Core::Engine, :at => '/'
           # get 'sessions/login'
 
   # get 'orders/show'
@@ -22,19 +29,22 @@ Rails.application.routes.draw do
 
   # get 'users/new'
 
-  # get 'products/show'
-  root 'products#index'
+
+  get 'home', to: 'myproducts#index'
 
   resources :sessions  
-  get 'login', to: 'sessions#login'
-  get 'logout', to: 'sessions#destroy'
+  get 'mylogin', to: 'sessions#login'
+  get 'mylogout', to: 'sessions#destroy'
   #get 'vendorlogin', to: 'sessions#vendorCreate', as: 'vendorlogin_path'
   #, :url => vendorlogin_path, method: :post
 
-  resources :products
+  resources :myproducts
   resources :users
   resources :admins
+  
   resources :vendors
+  get 'mydeals', to: 'vendors#show'
+
   resources :cust_cards
   resources :payables
   resources :orders

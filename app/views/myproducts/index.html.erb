@@ -11,6 +11,6 @@
 
 <% @product.each do |t| %>
 	<% title = t["title"] %>
-	<p><%= link_to "#{title}", product_path(t.id) %></p>
+	<p><%= link_to "#{title}", myproduct_path(t.id) %></p>
 
 <% end %>

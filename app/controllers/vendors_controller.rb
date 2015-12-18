@@ -1,10 +1,11 @@
 class VendorsController < ApplicationController
   def show
+    @thisProducts = Myproduct.where(vendor_id:session[:user_id])
   end
 
   def new
     if session[:user_id]
-      redirect_to root_path
+      redirect_to '/home'
     end
     @vendor = Vendor.new
   end
@@ -32,7 +33,7 @@ class VendorsController < ApplicationController
       User.create(fname:"placeholdfname", lname:"placeholdlname", username:username, email:emailPlaceholder, 
       password:userPlaceholder,password_confirmation:userPlaceholder, phone:"111-111-1111", vend:"false") 
       flash[:alert] = "New Vendor Account Created, Please Login"
-      redirect_to login_path
+      redirect_to mylogin_path
     else
       if vendor.errors.full_messages.any?
         # vendor.errors.full_messages.each do |message| 
@@ -78,6 +79,6 @@ class VendorsController < ApplicationController
     # end
     session[:user_id] = nil
     flash[:notice] = 'Vendor Deleted!'
-    redirect_to root_path
+    redirect_to '/home'
   end
 end

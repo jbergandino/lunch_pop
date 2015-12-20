@@ -60,4 +60,37 @@ class MyproductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Myproduct.find(params[:id])
+  end
+  def update
+    @product = Myproduct.find(params[:id])
+    counter = @product.counter
+    if counter > 0
+      newCounter = counter - 1
+    else
+      newCounter = 0
+    end
+    @product.update(counter:newCounter)
+    #WebsocketRails[:channel_updates].trigger 'boopcast', 'thisWorked'
+    flash[:notice] = "Product Successfully Updated"
+    redirect_to myproduct_path(@product)
+  end
+
+  def socket
+    WebsocketRails[:channel_updates].trigger 'new_person', 'first socket'
+  end
+
+  def secondsocket
+    WebsocketRails[:channel_updates].trigger 'boopcast', 'second socket'
+  end
+
+
 end
+
+
+
+
+
+
+

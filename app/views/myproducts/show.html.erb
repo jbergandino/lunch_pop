@@ -4,6 +4,36 @@
 <h4>Description: <%= @product.description %></h4>
 <h4>Price: <%= @product.price %></h4>
 <h4>Expiration: <%= @product.expiration %></h4>
+<h4>Deals Remaining: <%= @product.counter %></h4>
 
-<%= link_to 'Add to Lunch Cart!', order_path(@product.id), method: :post %>
+
+<%= link_to 'Add to Lunch Cart!', myproduct_path(@product.id), method: :put, :id => 'addToCart'  %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var dispatcher = new WebSocketRails('localhost:3000/websocket');
+    dispatcher.on_open = function(data) {
+      console.log('Connection has been established: ', data);
+      dispatcher.trigger('hello');
+    };
+
+    $("#addToCart").click(function() {
+      console.log("cart button clicked")
+      dispatcher.trigger('button_clicked', {
+        button: 'Add To Cart',
+        name: '<%= @product.id %>'
+      });
+    });
+
+    channel = dispatcher.subscribe('channel_updates');
+
+    channel.bind('new_person', function() {
+      $("#messages").append("<br/>a new person joined.");
+    });
+
+    channel.bind('boopcast', function(data) {
+      $("#messages").append("<br/>user " + data + " booped the button.");
+    });
+   });
+</script>
+<br>
 

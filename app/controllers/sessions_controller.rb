@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
   def login
     if session[:user_id]
-      redirect_to '/home'
+      redirect_to '/mydeals'
     end
   end
   def create
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       if @user.password == params[:password] 
         session[:user_id] = @user.id
         flash[:notice] = "Hello #{@user.username}!"
-        redirect_to '/home'
+        redirect_to '/mydeals'
       else
         flash[:alert] = "Login Not Successful, Please Try Again"
         redirect_to mylogin_path
@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
       if @user.password == params[:password] 
         session[:user_id] = @user.id
         flash[:notice] = "Hello #{@user.username}!"
-        redirect_to '/home'
+        redirect_to '/mydeals'
       else
         flash[:alert] = "Login Not Successful, Please Try Again"
         redirect_to '/home'

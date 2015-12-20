@@ -27,7 +27,12 @@
 	<% end %>
 	<h3><%= link_to t.title, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
 	<h3>Deals Left: <%= t.counter %></h3>
-	<% tempClassName = t.title %>
+
+	<!-- Setting dynamic unique class name -->
+	<% entireTempClassName = t.title.to_s << t.id.to_s %>
+	<!-- strip out all symbols and spaces -->
+	<% tempClassName = entireTempClassName.gsub(/[^a-zA-Z0-9]/, '') %>
+
 	<div class="<%= tempClassName %>" style="margin:2em;"></div>
 	<script type="text/javascript">
 		var clock;

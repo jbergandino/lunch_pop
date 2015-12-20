@@ -18,7 +18,7 @@
 			<% if User.where(id:session[:user_id]).first.lname=="placeholdlname"%>
 				<li><%= link_to 'Preferences', edit_vendor_path(session[:user_id]) %></li>
 				<li><%= link_to 'Post A Deal!', new_myproduct_path%></li>				
-				<li><%= link_to 'My Deals', mydeals_path%></li>				
+				<li><%= link_to 'My Deals', mydeals_path, 'data-no-turbolink' => true%></li>				
 			<% else %>
 				<li><%= link_to 'Preferences', edit_user_path(session[:user_id]) %></li>
 			<% end %>

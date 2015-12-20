@@ -10,7 +10,7 @@
 			  zoom: 35%;
  			}
 	</style>
-
+	<script src="assets/flipclock.min.js"></script>
 </head>
 
 <h1><%= @thisUser %>'s Deals</h1>
@@ -25,11 +25,12 @@
 	<% else %>
 		<% expirationStatus = "Active" %>
 	<% end %>
-	<h3><%= link_to t.title, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
+	<h3><%= link_to t.name, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
 	<h3>Deals Left: <%= t.counter %></h3>
+	<h3>Deals Sold: <%= t.deals_sold %></h3>
 
 	<!-- Setting dynamic unique class name -->
-	<% entireTempClassName = t.title.to_s << t.id.to_s %>
+	<% entireTempClassName = t.name.to_s << t.id.to_s %>
 	<!-- strip out all symbols and spaces -->
 	<% tempClassName = entireTempClassName.gsub(/[^a-zA-Z0-9]/, '') %>
 

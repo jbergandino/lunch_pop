@@ -24,6 +24,10 @@ class MyproductsController < ApplicationController
     price = params[:myproduct][:price]
     expiration = params[:myproduct][:expiration]
     counter = params[:myproduct][:counter]
+    dealsSold = 0
+
+    uniqueIdentifier = session[:user_id].to_s << title.to_s << rand(0..999999).to_s
+    uniqueIdentifier = uniqueIdentifier.gsub(/[^a-zA-Z0-9]/,'')
 
 
     if expiration=="true"
@@ -32,14 +36,17 @@ class MyproductsController < ApplicationController
     	expires = DateTime.now+30.minutes
     end
     product = Myproduct.new(title:title, subtitle:subtitle, description:description, 
-    	expiration:expires, price:price, counter:counter, vendor_id: session[:user_id])
+    	expiration:expires, price:price, counter:counter, deals_began_with:counter, deals_sold:dealsSold, 
+      vendor_id:session[:user_id], unique_identifier:uniqueIdentifier)
 
     spreeproduct = Spree::Product.new(name:title, price:price, description:description, 
-      shipping_category_id:1, available_on:'2015-12-10 00:00:00', expiration:expires, counter:counter)
+      shipping_category_id:1, available_on:'2015-12-10 00:00:00', expiration:expires, counter:counter, deals_began_with:counter, 
+      deals_sold:dealsSold, vendor_id:session[:user_id], unique_identifier:uniqueIdentifier)
+
 
     if product.save && spreeproduct.save
       flash[:alert] = "New Product Created!"
-      redirect_to '/home'
+      redirect_to '/mydeals'
     else
       if product.errors.full_messages.any?
         # Reverse Array so it starts with the first error rather than last
@@ -66,14 +73,31 @@ class MyproductsController < ApplicationController
   def update
     @product = Myproduct.find(params[:id])
     counter = @product.counter
+    dealsSold = @product.deals_sold
     if counter > 0
       newCounter = counter - 1
+      newDealsSold = dealsSold + 1
     else
       newCounter = 0
+      newDealsSold = dealsSold
     end
-    @product.update(counter:newCounter)
+
+    @spreeProduct = Spree::Product.find(params[:id])
+    spreeCounter = @spreeProduct.counter
+    spreeDealsSold = @spreeProduct.deals_sold
+    if spreeCounter > 0
+      newSpreeCounter = spreeCounter - 1
+      newSpreeDealsSold = spreeDealsSold + 1
+    else
+      newSpreeCounter = 0
+      newSpreeDealsSold = spreeDealsSold
+    end
+
+    @spreeProduct.update(counter:newSpreeCounter, deals_sold:newSpreeDealsSold)
+    @product.update(counter:newCounter, deals_sold:newDealsSold)
+
     #WebsocketRails[:channel_updates].trigger 'boopcast', 'thisWorked'
-    flash[:notice] = "Product Successfully Updated"
+    #flash[:notice] = "Product Successfully Updated"
     redirect_to myproduct_path(@product)
   end
 

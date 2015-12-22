@@ -17,13 +17,29 @@ class ThingController < WebsocketRails::BaseController
   	#set trigger on the purchase button
     # WebsocketRails[:channel_updates].trigger 'boopcast', message[:name]
     
+
+
     # Get the Product Id that Changed
-    thisProductId = message[:name].to_i
+    thisProductIdString = message[:name].to_s
+    thisProductIdInt = thisProductIdString.to_i
 
     # Fetch value of this product's remaining inventory counter 
-    newProductCount = Myproduct.find(thisProductId).counter - 1
+    thisProd = Myproduct.find(thisProductIdInt)
+    if thisProd.counter > 0
+      thisNewProductCount = thisProd.counter - 1
+      thisDealsSold = thisProd.deals_sold + 1
+    else
+      thisNewProductCount = thisProd.counter
+      thisDealsSold = thisProd.deals_sold
+    end
+
+    thisNewProductCountString = thisNewProductCount.to_s
+    thisDealsSoldString = thisDealsSold.to_s
+    # Concat the Product ID and the Counter so both get passed - will parse on view
+    thisData = thisProductIdString << "-" << thisNewProductCountString << "_" << thisDealsSoldString
+
     # Trigger Broadcast with New Remaining Product Count
-    WebsocketRails[:channel_updates].trigger 'boopcast', newProductCount
+    WebsocketRails[:channel_updates].trigger 'boopcast', thisData
 
   end
 end

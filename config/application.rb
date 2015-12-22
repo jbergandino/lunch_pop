@@ -39,3 +39,11 @@ module LunchPop
     config.middleware.delete Rack::Lock
   end
 end
+
+# module Spree
+#   LunchPop::Config = Spree::MyApplicationConfiguration.new
+#   config.middleware.delete Rack::Lock
+# end
+
+
+

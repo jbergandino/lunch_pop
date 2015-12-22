@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220194324) do
+ActiveRecord::Schema.define(version: 20151221043127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20151220194324) do
     t.integer  "deals_sold"
     t.integer  "deals_began_with"
     t.string   "unique_identifier"
+    t.datetime "start"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -470,6 +471,7 @@ ActiveRecord::Schema.define(version: 20151220194324) do
     t.integer  "deals_sold"
     t.integer  "deals_began_with"
     t.string   "unique_identifier"
+    t.datetime "start"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree

@@ -24,15 +24,15 @@
       });
     });
 
-    channel = dispatcher.subscribe('channel_updates');
+    //channel = dispatcher.subscribe('channel_updates');
 
-    channel.bind('new_person', function() {
-      $("#messages").append("<br/>a new person joined.");
-    });
+    // channel.bind('new_person', function() {
+    //   $("#messages").append("<br/>a new person joined.");
+    // });
 
-    channel.bind('boopcast', function(data) {
-      $("#messages").append("<br/>user " + data + " booped the button.");
-    });
+    // channel.bind('boopcast', function(data) {
+    //   $("#messages").append("<br/>user " + data + " booped the button.");
+    // });
    });
 </script>
 <br>

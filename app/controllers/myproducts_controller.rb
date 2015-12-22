@@ -18,6 +18,8 @@ class MyproductsController < ApplicationController
   end
 
   def create
+    p "HELLOHELLOHELLO"
+    p params[:myproduct][:start]
     title = params[:myproduct][:title]
     subtitle = params[:myproduct][:subtitle]
     description = params[:myproduct][:description]
@@ -25,23 +27,32 @@ class MyproductsController < ApplicationController
     expiration = params[:myproduct][:expiration]
     counter = params[:myproduct][:counter]
     dealsSold = 0
+    year = params[:myproduct]['start(1i)'].to_i
+    month = params[:myproduct]['start(2i)'].to_i
+    day = params[:myproduct]['start(3i)'].to_i
+    hour = params[:myproduct]['start(4i)'].to_i
+    minute = params[:myproduct]['start(5i)'].to_i
+    #taking in EST, add 5 hours to make it log to DB in UTC -0
+    thisStart = DateTime.new(year,month,day,hour,minute)+5.hours
+
+    
 
     uniqueIdentifier = session[:user_id].to_s << title.to_s << rand(0..999999).to_s
     uniqueIdentifier = uniqueIdentifier.gsub(/[^a-zA-Z0-9]/,'')
 
 
     if expiration=="true"
-    	expires = DateTime.now+1.hour
+    	expires = thisStart+1.hour
     else
-    	expires = DateTime.now+30.minutes
+    	expires = thisStart+30.minutes
     end
     product = Myproduct.new(title:title, subtitle:subtitle, description:description, 
     	expiration:expires, price:price, counter:counter, deals_began_with:counter, deals_sold:dealsSold, 
-      vendor_id:session[:user_id], unique_identifier:uniqueIdentifier)
+      vendor_id:session[:user_id], unique_identifier:uniqueIdentifier, start:thisStart)
 
     spreeproduct = Spree::Product.new(name:title, price:price, description:description, 
       shipping_category_id:1, available_on:'2015-12-10 00:00:00', expiration:expires, counter:counter, deals_began_with:counter, 
-      deals_sold:dealsSold, vendor_id:session[:user_id], unique_identifier:uniqueIdentifier)
+      deals_sold:dealsSold, vendor_id:session[:user_id], unique_identifier:uniqueIdentifier, start:thisStart)
 
 
     if product.save && spreeproduct.save

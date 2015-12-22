@@ -9,59 +9,167 @@
 			  margin: 1em;
 			  zoom: 35%;
  			}
+
 	</style>
 	<script src="assets/flipclock.min.js"></script>
 </head>
 
-<h1><%= @thisUser %>'s Deals</h1>
-<% @thisProducts.each do |t| %>
+<h1><%= @thisUser %>'s Live Deals</h1>
 
-	<% secondsLeft = t.expiration.to_time.to_i - Time.now.to_i %>
-	<% if secondsLeft <= 0 %>
-		<% secondsLeft = 0 %>
-	<% end %>
-	<% if @now > t.expiration  %>
-		<% expirationStatus = "Expired" %>
-	<% else %>
-		<% expirationStatus = "Active" %>
-	<% end %>
-	<h3><%= link_to t.name, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
-	<h3>Deals Left: <%= t.counter %></h3>
-	<h3>Deals Sold: <%= t.deals_sold %></h3>
+<% if @liveDeals.length > 0 %>
 
-	<!-- Setting dynamic unique class name -->
-	<% entireTempClassName = t.name.to_s << t.id.to_s %>
-	<!-- strip out all symbols and spaces -->
-	<% tempClassName = entireTempClassName.gsub(/[^a-zA-Z0-9]/, '') %>
+	<% @liveDeals.each do |t| %>
 
-	<div class="<%= tempClassName %>" style="margin:2em;"></div>
-	<script type="text/javascript">
-		var clock;
+		<% secondsLeft = t.expiration.to_time.to_i - DateTime.now.to_time.to_i %>
+		<% if secondsLeft <= 0 %>
+			<% secondsLeft = 0 %>
+		<% end %>
+		<% if @now > t.expiration  %>
+			<% expirationStatus = "Expired" %>
+		<% else %>
+			<% expirationStatus = "Active" %>
+		<% end %>
+		<h3><%= link_to t.name, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
+		<h3>Start Time: <%= t.start.in_time_zone("Eastern Time (US & Canada)") %></h3>
+		<h3>Expiration Time: <%= t.expiration.in_time_zone("Eastern Time (US & Canada)") %></h3>
+		<h3 id="<%= t.id %>counter">Deals Left: <%= t.counter %></h3>
+		<h3 id="<%= t.id %>sold">Deals Sold: <%= t.deals_sold %></h3>
 
-		$(document).ready(function() {
-						
-			// Grab the current date
-			var currentDate = new Date();
-			//var expTime = new Date(<%= t.expiration %>);
+		
+		<!-- Setting dynamic unique class name -->
+		<% entireTempClassName = t.name.to_s << t.id.to_s %>
+		<!-- strip out all symbols and spaces -->
+		<% tempClassName = entireTempClassName.gsub(/[^a-zA-Z0-9]/, '') %>
 
-			// Due Date - year, month, day, hours, minutes, seconds, milliseconds
-			var futureDate  = new Date(currentDate.getFullYear(), 11, 22,11,59,59);
+		<div class="<%= tempClassName %>"></div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+						var aDayInSecs=24*60*60, anHourInSecs=60*60, aMinuteInSecs=60;
+				
 
-			// Calculate the difference in seconds between the future and current date
-			var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
-			//console.log(expTime);
-
-			// Instantiate a coutdown FlipClock
-			clock = $(".<%= tempClassName %>").FlipClock(<%= secondsLeft %>, {
-				clockFace: 'DailyCounter',
-				countdown: true
+				var clock = $(".<%= tempClassName %>").FlipClock(<%= secondsLeft %>, {
+				    clockFace: 'DailyCounter',
+				    countdown: true,
+				    callbacks: {
+				        interval: function () {
+				            var time = <%= secondsLeft %>;
+				            if (time < aDayInSecs) {
+				              var $days = $("span.days").nextUntil("span").andSelf();
+				              if ($days.length>0) $days.remove();  
+				            }
+				            if (time < anHourInSecs) {
+				              var $hours = $("span.hours").nextUntil("span").andSelf();
+				              if ($hours.length>0) $hours.remove();  
+				            }
+				            if (time < aMinuteInSecs) {
+				              var $min = $("span.minutes").nextUntil("span").andSelf();
+				              if ($min.length>0) $min.remove();  
+				            }
+				            if (time <= 1) {
+				              var $sec = $("span.seconds").next("ul").andSelf();
+				              if ($sec.length>0) $sec.remove(); 
+				              $(".clock").html("DONE");  
+				            }
+				        }
+				    }   
+				});
 			});
-		});
-	</script>
-	<hr>
+		</script>
+		<hr>
+	<% end %>
+<% else %>
+	<h3>Currently You Have No Live Deals</h3>
 <% end %>
-	
 
+
+<h1><%= @thisUser %>'s Upcoming Deals</h1>
+  
+<% if @futureDeals.length > 0 %>
+	<% @futureDeals.each do |t| %>
+		<% if @now > t.expiration  %>
+			<% expirationStatus = "Expired" %>
+		<% else %>
+			<% expirationStatus = "Active" %>
+		<% end %>
+		<h3><%= link_to t.name, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
+		<h3>Start Time: <%= t.start.in_time_zone("Eastern Time (US & Canada)") %></h3>
+		<h3>Expiration Time: <%= t.expiration.in_time_zone("Eastern Time (US & Canada)") %></h3>
+		<h3 id="<%= t.id %>counter">Deals Left: <%= t.counter %></h3>
+		<h3 id="<%= t.id %>sold">Deals Sold: <%= t.deals_sold %></h3>
+		<hr>
+	<% end %>
+<% else %>
+		<h3>Currently You Have No Upcoming Deals</h3>
+<% end %>
+
+
+<h1><%= @thisUser %>'s Expired Deals</h1>
+  
+<% if @expiredDeals.length > 0 %>
+	<% @expiredDeals.each do |t| %>
+		<% if @now > t.expiration  %>
+			<% expirationStatus = "Expired" %>
+		<% else %>
+			<% expirationStatus = "Active" %>
+		<% end %>
+		<h3><%= link_to t.name, myproduct_path(t.id) %> - Current Status: <span class="<%= expirationStatus %>"><%= expirationStatus %></span></h3>
+		<h3 id="<%= t.id %>counter">Deals Left: <%= t.counter %></h3>
+		<h3 id="<%= t.id %>sold">Deals Sold: <%= t.deals_sold %></h3>
+		<hr>
+	<% end %>
+<% else %>
+		<h3>Currently You Have No Expired Deals</h3>
+<% end %>
+
+
+<!-- <p id="messages">messages: </p> -->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var dispatcher = new WebSocketRails('localhost:3000/websocket');
+    dispatcher.on_open = function(data) {
+      console.log('Connection has been established: ', data);
+      //dispatcher.trigger('hello');
+    };
+
+
+
+    // $("#addToCart").click(function() {
+    //   console.log("boop button clicked")
+    //   dispatcher.trigger('button_clicked', {
+    //     button: 'Add To Cart',
+    //     name: 'hi'
+    //   });
+    // });
+
+    // $("#boopButton").click(function() {
+    //   console.log("cart button clicked")
+    //   dispatcher.trigger('button_clicked', {
+    //     button: 'boop',
+    //     name: $("#name").val()
+    //   });
+    // });
+
+    channel = dispatcher.subscribe('channel_updates');
+
+    // channel.bind('new_person', function() {
+    //   $("#messages").append("<br/>a new person joined.");
+    // });
+
+    channel.bind('boopcast', function(data) {
+    	// Build dynamic class name from websocket data, id is before '-' and counter is after '-'
+    	var dash = data.indexOf("-");
+    	var underscore = data.indexOf("_");
+    	var thisMessageId = data.slice(0,dash);
+    	var thisCounter = data.slice(dash+1,underscore);
+    	var thisDealsSold = data.slice(underscore+1,data.length);
+
+
+      $("#" + thisMessageId + "counter").replaceWith('<h3 id="' + thisMessageId + 'counter">Deals Left: ' + thisCounter + '</h3>');
+      $("#" + thisMessageId + "sold").replaceWith('<h3 id="' + thisMessageId + 'sold">Deals Sold: ' + thisDealsSold + '</h3>');
+    });
+  });
+</script>
 
 
 

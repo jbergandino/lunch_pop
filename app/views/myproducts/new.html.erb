@@ -31,6 +31,10 @@
   <%= f.number_field :counter  %>
   <br>
   <br>
+  <%= f.label :start, "Desired Start of Deal Date/Time(EST):" %>
+  <%= f.datetime_select :start, { default: DateTime.now.utc-4.hours, ampm: true, use_short_month: true, start_year: Time.now.year, end_year: Time.now.year+1, minute_step: 5} %>
+  <br>
+  <br>
 
   <%= f.submit "Post Product!", :class => "signup_button" %>
 <% end %>

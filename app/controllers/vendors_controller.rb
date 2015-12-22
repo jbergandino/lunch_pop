@@ -1,9 +1,13 @@
 class VendorsController < ApplicationController
   def show
     #@thisProducts = Myproduct.where(vendor_id:session[:user_id]).reverse
-    @thisProducts = Spree::Product.where(vendor_id:session[:user_id]).reverse
+    @thisProducts = Spree::Product.where(vendor_id:session[:user_id])
     @thisUser = User.find(session[:user_id]).username
     @now = DateTime.now
+    @expiredDeals = @thisProducts.where('expiration < ? AND start < ?', @now, @now)
+    @liveDeals = @thisProducts.where('expiration > ? AND start < ?', @now, @now)
+    @futureDeals = @thisProducts.where('expiration > ? AND start > ?', @now, @now)
+
   end
 
   def new

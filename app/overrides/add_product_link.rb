@@ -4,3 +4,4 @@ Deface::Override.new( :virtual_path => "spree/shared/_main_nav_bar",
     
     # :text => '<li id="home-link" data-hook><%= link_to "Hello", root_path %></li>')
 	 :text => '<li id="home-link" data-hook><%= link_to "Vendor Login", "/mylogin" %></li>')
+

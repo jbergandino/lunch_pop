@@ -61,10 +61,10 @@
 				              var $hours = $("span.hours").nextUntil("span").andSelf();
 				              if ($hours.length>0) $hours.remove();  
 				            }
-				            if (time < aMinuteInSecs) {
-				              var $min = $("span.minutes").nextUntil("span").andSelf();
-				              if ($min.length>0) $min.remove();  
-				            }
+				            // if (time < aMinuteInSecs) {
+				            //   var $min = $("span.minutes").nextUntil("span").andSelf();
+				            //   if ($min.length>0) $min.remove();  
+				            // }
 				            if (time <= 1) {
 				              var $sec = $("span.seconds").next("ul").andSelf();
 				              if ($sec.length>0) $sec.remove(); 
@@ -78,7 +78,7 @@
 		<hr>
 	<% end %>
 <% else %>
-	<h3>Currently You Have No Live Deals</h3>
+	<h3 class="noDeals">Currently You Have No Live Deals</h3>
 <% end %>
 
 
@@ -99,7 +99,7 @@
 		<hr>
 	<% end %>
 <% else %>
-		<h3>Currently You Have No Upcoming Deals</h3>
+		<h3 class="noDeals">Currently You Have No Upcoming Deals</h3>
 <% end %>
 
 
@@ -118,7 +118,7 @@
 		<hr>
 	<% end %>
 <% else %>
-		<h3>Currently You Have No Expired Deals</h3>
+		<h3 class="noDeals">Currently You Have No Expired Deals</h3>
 <% end %>
 
 

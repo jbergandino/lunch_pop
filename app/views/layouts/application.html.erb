@@ -8,9 +8,11 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   		<!-- FlipClock JS -->
 	<script src="assets/flipclock.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
+<div class="navbar">
 	<ul>
 		<li><%= link_to 'All Current Deals', '/home'%></li>
 		<% if session[:user_id] %>
@@ -28,6 +30,9 @@
 			<li><%= link_to 'Login!', mylogin_path%></li>
 		<% end %>
 	</ul>
-<%= yield %>
+</div>
+<div class="yield">
+	<%= yield %>
+</div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 class VendorsController < ApplicationController
+
   def show
+
     #@thisProducts = Myproduct.where(vendor_id:session[:user_id]).reverse
     @thisProducts = Spree::Product.where(vendor_id:session[:user_id])
     @thisUser = User.find(session[:user_id]).username

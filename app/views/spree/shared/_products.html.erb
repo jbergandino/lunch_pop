@@ -17,6 +17,7 @@
     }
   </style>
   <script src="assets/flipclock.min.js"></script>
+  <script src="assets/application.js"></script>
 </head>
 <%
   paginated_products = @searcher.retrieve_products if params.key?(:keywords)
@@ -91,10 +92,10 @@
                       var $hours = $("span.hours").nextUntil("span").andSelf();
                       if ($hours.length>0) $hours.remove();  
                     }
-                    if (time < aMinuteInSecs) {
-                      var $min = $("span.minutes").nextUntil("span").andSelf();
-                      if ($min.length>0) $min.remove();  
-                    }
+                    // if (time < aMinuteInSecs) {
+                    //   var $min = $("span.minutes").nextUntil("span").andSelf();
+                    //   if ($min.length>0) $min.remove();  
+                    // }
                     if (time <= 1) {
                       var $sec = $("span.seconds").next("ul").andSelf();
                       if ($sec.length>0) $sec.remove(); 
@@ -146,8 +147,8 @@
       var thisDealsSold = data.slice(underscore+1,data.length);
 
 
-      $("#" + thisMessageId + "counter").replaceWith('<h3 id="' + thisMessageId + 'counter">Deals Left: ' + thisCounter + '</h3>');
-      $("#" + thisMessageId + "sold").replaceWith('<h3 id="' + thisMessageId + 'sold">Deals Sold: ' + thisDealsSold + '</h3>');
+      $("#" + thisMessageId + "counter").replaceWith('<div id="' + thisMessageId + 'counter">Deals Left: ' + thisCounter + '</div>');
+      $("#" + thisMessageId + "sold").replaceWith('<div id="' + thisMessageId + 'sold">Deals Sold: ' + thisDealsSold + '</div>');
     });
   });
 </script>

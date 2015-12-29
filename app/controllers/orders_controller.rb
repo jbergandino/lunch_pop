@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
 
     if order.save
       #flash[:alert] = "Order Submitted!"
-      flash[:alert] = "Added To Cart"
+      #flash[:alert] = "Added To Cart"
       redirect_to '/home'
     else
       if order.errors.full_messages.any?

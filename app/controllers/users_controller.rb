@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       Vendor.create(bname:userPlaceholder, contact:"placeholdcname", address:"placeholdaddress", city:"placeholdcity", 
       zip:"placeholdzip", username:username, email:emailPlaceholder, password:userPlaceholder,password_confirmation:userPlaceholder, 
       phone:"111-111-1111", vend:"true") 
-      flash[:alert] = "New User Created, Please Login"
+      #flash[:alert] = "New User Created, Please Login"
       redirect_to mylogin_path
     else
       if user.errors.full_messages.any?

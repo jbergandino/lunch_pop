@@ -14,9 +14,8 @@
 
 <div class="navbar">
 	<ul>
-		<li><%= link_to 'All Current Deals', '/home'%></li>
+		<li><%= link_to 'All Current Deals', '/'%></li>
 		<% if session[:user_id] %>
-				<li><%= link_to 'Logout', mylogout_path%></li>
 			<% if User.where(id:session[:user_id]).first.lname=="placeholdlname"%>
 				<li><%= link_to 'Preferences', edit_vendor_path(session[:user_id]) %></li>
 				<li><%= link_to 'Post A Deal!', new_myproduct_path%></li>				
@@ -24,10 +23,11 @@
 			<% else %>
 				<li><%= link_to 'Preferences', edit_user_path(session[:user_id]) %></li>
 			<% end %>
+			<li><%= link_to 'Logout', mylogout_path%></li>
 		<% else %>
-			<li><%= link_to 'Create Customer Account', new_user_path%></li>
-			<li><%= link_to 'Create Vendor Account', new_vendor_path%></li>
-			<li><%= link_to 'Login!', mylogin_path%></li>
+			<!-- <li>original create customer acct was here</li> -->
+			<li><%= link_to 'Create Business Account', new_vendor_path%></li>
+			<span class="login-link"><li><%= link_to 'Login', mylogin_path%></li></span>
 		<% end %>
 	</ul>
 </div>

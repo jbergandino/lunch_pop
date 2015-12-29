@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if @user 
       if @user.password == params[:password] 
         session[:user_id] = @user.id
-        flash[:notice] = "Hello #{@user.username}!"
+        #flash[:notice] = "Hello #{@user.username}!"
         redirect_to '/mydeals'
       else
         flash[:alert] = "Login Not Successful, Please Try Again"
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
     if @user 
       if @user.password == params[:password] 
         session[:user_id] = @user.id
-        flash[:notice] = "Hello #{@user.username}!"
+        #flash[:notice] = "Hello #{@user.username}!"
         redirect_to '/mydeals'
       else
         flash[:alert] = "Login Not Successful, Please Try Again"
@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "Successfully Logged Out"
-    redirect_to '/home'
+    #flash[:notice] = "Successfully Logged Out"
+    redirect_to '/'
   end
 end

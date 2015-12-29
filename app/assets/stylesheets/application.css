@@ -87,6 +87,14 @@ h1 {
 	color: #AADDD4;
 }
 
+.login-link li a {
+	color: #AADDD4;
+}
+
+.login-link li a:visited {
+	color: #AADDD4;
+}
+
 .yield {
 	margin-top: 75px;
 	margin-left: 10px;

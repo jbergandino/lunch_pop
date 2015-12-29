@@ -106,9 +106,7 @@ class MyproductsController < ApplicationController
 
     @spreeProduct.update(counter:newSpreeCounter, deals_sold:newSpreeDealsSold)
     @product.update(counter:newCounter, deals_sold:newDealsSold)
-
     #WebsocketRails[:channel_updates].trigger 'boopcast', 'thisWorked'
-    #flash[:notice] = "Product Successfully Updated"
     redirect_to myproduct_path(@product)
   end
 

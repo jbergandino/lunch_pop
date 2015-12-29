@@ -70,7 +70,7 @@ class VendorsController < ApplicationController
     username = params[:vendor][:username]
     email = params[:vendor][:email]
     user.update(username: username, email: email)
-    flash[:notice] = "vendor Successfully Updated"
+    flash[:notice] = "Successfully Updated"
     redirect_to vendor_path(@vendor)
   end
 
@@ -88,6 +88,6 @@ class VendorsController < ApplicationController
     # end
     session[:user_id] = nil
     flash[:notice] = 'Vendor Deleted!'
-    redirect_to '/home'
+    redirect_to '/'
   end
 end

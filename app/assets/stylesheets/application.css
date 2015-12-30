@@ -17,7 +17,8 @@
 
 .signup_button {
 	width: 200px;
-	background-color: orange;
+	background-color: white;
+	/*outline: none;*/
 }
 
 
@@ -37,7 +38,8 @@
 html {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 900;
-	background-color: #AADDD4;
+	/*background-color: #AADDD4;*/
+	background-color: #054586;
 	text-decoration: none;
 	margin: 0;
 	padding: 0;
@@ -50,8 +52,8 @@ html a:visited {
 h1 {
 	font-size: 275%;
 	clear: both;
-	color: #EB593B;
-	text-decoration: underline; 
+	/*color: #EB593B;*/
+	/*text-decoration: underline; */
 }
 
 .noDeals {
@@ -66,6 +68,16 @@ h1 {
 	height: 65px;
 	background-color: #EB593B;
 }
+
+/*  Side Navbar  */
+/*.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 190px;
+	height: 100%;
+	background-color: #EB593B;
+}*/
 
 .navbar ul li {
 	float: left;
@@ -84,21 +96,48 @@ h1 {
 }
 
 .navbar ul li a:hover {
-	color: #AADDD4;
+	color: #054586;
 }
 
 .login-link li a {
-	color: #AADDD4;
+	color: #054586;
 }
 
 .login-link li a:visited {
-	color: #AADDD4;
+	color: #054586;
 }
 
 .yield {
 	margin-top: 75px;
 	margin-left: 10px;
 }
+
+/*Vendor Login Page*/
+.h1_login {
+	text-align: center;
+	padding-top: 20px;
+}
+
+/*Myproducts - New Page*/
+
+.deal_start {
+	text-align: left;
+}
+
+.product_desc {
+	width: 500px;
+	height: 200px;
+	font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
 
 
 

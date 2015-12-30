@@ -1,43 +1,91 @@
-<h1>Vendor Sign Up Below!</h1>
-<br>
+<html lang="en" class="demo-1 no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="description" content="LunchPop!" />
+    <meta name="keywords" content="LunchPop!" />
+    <!-- <meta name="author" content="" /> -->
+    <!-- <link rel="shortcut icon" href="../favicon.ico"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/demo.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/component.css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="cctop clearfix">
+      </div>
+      <div class="wrapper">
+        <div class="cclogin icons">
+          <h2>Business Account Registration</h2>
 
-<%= form_for @vendor do |f| %>
+          <%= form_for @vendor do |f| %>
 
-  <%= f.label :bname, "Business Name:" %>
-  <%= f.text_field :bname  %>
-  
-  <%= f.label :contact, "Primary Contact:" %>
-  <%= f.text_field :contact  %>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-building fa-2x icon-a"></i></span>
+                <%= f.text_field :bname, :placeholder => "Business Name", :class => "aaa" %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-map-marker fa-2x icon-b"></i></span>
+                <%= f.text_field :address, :placeholder => "Business Address", :class => "bbb"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-map-marker fa-2x icon-c"></i></span>
+                <%= f.text_field :city, :placeholder => "Business City", :class => "ccc"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-map-marker fa-2x icon-d"></i></span>
+                <%= f.text_field :zip, :placeholder => "Business Zip Code", :class => "ddd"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-phone-square fa-2x icon-e"></i></span>
+                <%= f.text_field :phone, :placeholder => "Business Phone", :class => "eee"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-envelope fa-2x icon-i"></i></span>
+                <%= f.text_field :email, :placeholder => "Primary Business Email (for order notifications)", :class => "iii"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-user fa-2x icon-j"></i></span>
+                <%= f.text_field :contact, :placeholder => "Primary Contact Name", :class => "jjj"  %>
+              </p>
+              <br>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-user fa-2x icon-f"></i></span>
+                <!-- <input type="text" name="Username" value="" placeholder="Username"> -->
+                <%= f.text_field :username, :placeholder => "Username", :class => "fff"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-unlock-alt fa-2x icon-g"></i></span>
+                  <%= f.password_field :password, :placeholder => "Choose A Password", :class => "ggg"  %>
+              </p>
+              <p>
+                <span class="cclogin-addon"><i class="fa fa-unlock-alt fa-2x icon-h"></i></span>
+                <%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :class => "hhh"  %>
+              </p>
 
-  <%= f.label :address, "Address:" %>
-  <%= f.text_field :address  %>
+             <!-- 
+              <p>
+                <select>
+                  <option disabled="" selected="" value="0">Gender</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                </select>
+              </p> -->
+              <!-- <p><input type="checkbox" name="remember">I agree with terms and conditions.</p> -->
+              <!-- <p><input type="checkbox" name="remember">I want to recive the news and offers.</p> -->
+              <p>
+                <%= f.submit "Sign Up!", :class => "signup_button" %>
+              </p>
+          <% end %> 
+                    
+        </div>
+      </div>
+    </div><!-- /container -->
 
-  <%= f.label :city, "City:" %>
-  <%= f.text_field :city  %>
+    <p><%= flash[:alert] %></p>
+    
+  </body>
 
-  <%= f.label :zip, "Zip Code:" %>
-  <%= f.text_field :zip  %>
+<!--   The icons used on this page are from the Font Awesome (http://fortawesome.github.io/Font-Awesome/) set by Davegandy and they are licensed under the CC BY 3.0 license (http://creativecommons.org/licenses/by/3.0/). -->
 
-  <%= f.label :username, "Username:" %>
-  <%= f.text_field :username  %>
-
-  
-  <%= f.label :email, "Email:" %>
-  <%= f.text_field :email  %>
-
-  <br>
-  <br>
-  <%= f.label :password, "Password:" %>
-  <%= f.password_field :password  %>
-  
-  <%= f.label :password_confirmation, "Confirm Password:" %>
-  <%= f.password_field :password_confirmation  %>
-  
-  <%= f.label :phone, "Phone:" %>
-  <%= f.text_field :phone  %>
-
-  <%= f.submit "Sign Up!", :class => "signup_button" %>
-<% end %>
-
-<p><%= flash[:alert] %></p>
 

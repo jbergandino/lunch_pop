@@ -1,15 +1,23 @@
 <p><%= flash[:alert] %></p>
-<h1>Business Account Login</h1>
+<h1 class="h1_login">Business Account Login</h1>
 <br>
 
+  <div class="container">
+    <div class="wrapper">
+      <div class="cclogin icons">
+        <%= form_tag sessions_path, :method => :post do %>
+        <p>
+        	<%= text_field_tag :username, nil, placeholder: 'Username'%>
+        </p>
+        <p>
+        	<%= password_field_tag :password, nil, placeholder: 'Password'%>
+        </p>
 
-<%= form_tag sessions_path, :method => :post do %>
 
-  <%= label_tag :username %>
-  <%= text_field_tag :username %>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
+          <%= submit_tag "Login", class: "signup_button"  %>
 
-  <%= submit_tag "Login"  %>
+        <% end %>
 
-<% end %>
+      </div>
+    </div>
+  </div>

@@ -1,44 +1,51 @@
-<h1>Post A New Deal!</h1>
-<br>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<div class="container">
+  <div class="new_product_wrapper">
+    <div class="cclogin icons num_field">
+      <h2>Post A New Deal!</h2>
 
-<%= form_for @product do |f| %>
+      <%= form_for @product do |f| %>
 
-  <%= f.label :title, "Food Title:" %>
-  <%= f.text_field :title  %>
-  
-  <%= f.label :subtitle, "Food Subtitle:" %>
-  <%= f.text_field :subtitle  %>
-
-  <%= f.label :description, "Food Description:" %>
-  <%= f.text_field :description  %>
-
+        <p>
+          <span class="cclogin-addon"><i class="fa fa-cutlery fa-2x icon-product-a"></i></span>
+          <%= f.text_field :title, :placeholder => "LunchPop Title", :class => "product_a"  %>
+        </p>
+        <p>
+          <%= f.text_area :description, :placeholder => "LunchPop Description", :class => "product_desc"  %>
+        </p>
+        <br>
+        <p>
+          <%= f.label :expiration, "Deal Expires in 1 Hour", :value => true  %>
+          <%= f.radio_button :expiration, true, :checked => true %>
+        </p>
+        <p>
+          <%= f.label :expiration, "Deal Expires in 30 Minutes", :value => false %>
+          <%= f.radio_button :expiration, false %>
+        </p>
+        <br>
+        <p>
+          <span class="cclogin-addon"><i class="fa fa-dollar fa-2x icon-product-b"></i></span>
+          <%= f.number_field :price, :placeholder => "Total Price", :class => "product_b"  %>
+        </p>
+        <p>
+          <span class="cclogin-addon"><i class="fa fa-bar-chart fa-2x icon-product-c"></i></span>
+          <%= f.number_field :counter, :placeholder => "Total LunchPop Deals Offered", :class => "product_c"  %>
+        </p>
+    </div>
+  </div>
   <br>
-  <br>
-  <%= f.label :expiration, "Deal Expires in 1 Hour", :value => true  %>
-  <%= f.radio_button :expiration, true, :checked => true %>
-  <br>
-  <%= f.label :expiration, "Deal Expires in 30 Minutes", :value => false %>
-  <%= f.radio_button :expiration, false %>
-  
-  <br> 
-  <br>
-  
-  <%= f.label :price, "Price:" %>
-  <%= f.number_field :price  %>
-  <br>
-  <br>
-  <%= f.label :counter, "Total Deals Offered:" %>
-  <%= f.number_field :counter  %>
-  <br>
-  <br>
-  <%= f.label :start, "Desired Start of Deal Date/Time(EST):" %>
-  <%= f.datetime_select :start, { default: DateTime.now.utc-4.hours, ampm: true, use_short_month: true, start_year: Time.now.year, end_year: Time.now.year+1, minute_step: 5} %>
-  <br>
-  <br>
-
-  <%= f.submit "Post Product!", :class => "signup_button" %>
-<% end %>
-
-
-<p><%= flash[:alert] %></p>
+        <p class="deal_start new_product_wrapper">
+          <%= f.label :start, "Desired Start of Deal Date/Time(EST):" %>
+          <br>
+          <%= f.datetime_select :start, { default: DateTime.now.utc-4.hours, ampm: true, use_short_month: true, start_year: Time.now.year, end_year: Time.now.year+1, minute_step: 5} %>
+        </p>  
+        <br>
+        <p class="new_product_wrapper">
+          <%= f.submit "Post Product!", :class => "signup_button" %>
+        </p>
+      <% end %> 
+                
+</div><!-- /container -->
 

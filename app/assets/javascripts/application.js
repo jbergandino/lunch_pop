@@ -100,5 +100,4 @@ $(document).ready(function() {
          $("i.icon-product-c").toggleClass("fa-spin");
       });
 
-
   });

@@ -1,8 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 body {
-	background: #054586;
-	color: #fff;
+	/*background: #054586;*/
+	background: white;
+	/*color: #fff;*/
 	font-weight: 400;
 	font-size: 1em;
 	font-family: 'Lato', Arial, sans-serif;
@@ -11,7 +12,7 @@ body {
 	padding-bottom:40px;
 }
 a {
-	color: #f0f0f0;
+	/*color: #f0f0f0;*/
 	text-decoration: none;
 }
 
@@ -92,7 +93,7 @@ a, button {
 	padding: 0.7em 1.1em;
 	outline: none;
 	border: 2px solid #fff;
-	color: #fff;
+	/*color: #fff;*/
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 1px;

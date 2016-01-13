@@ -1,3 +1,21 @@
 == README
 
 Lunch Flash Sale Application - Get Your Lunch Discount Before It Pops! 
+
+This application was built by John Bergandino using Ruby on Rails and is linked to a PostgreSQL Database.
+
+Behind the scenes:
+The customer-user UI is powered by the Spree Commerce gem and the business-user UI is a custom built multi-vendor marketplace backend that links everything together through multiple namespaces.  The authentication for Spree utilizes Devise.
+
+The customer-user views were created using Deface and laid out via Spree's custom asset pipeline.  Logic customization was created with multiple decorator files.  The Spree models handle the customer-user interaction and they are linked up to additional vendor-user models I created as needed.
+
+
+Big thanks to FlipClock.js for their awesome ticking down clock feature:
+Further documentation can be found at http://flipclockjs.com/
+License
+Copyright (c) 2013 Objective HTML, LCC shared under MIT LICENSE
+
+
+
+
+ 

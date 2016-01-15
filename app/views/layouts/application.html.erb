@@ -14,6 +14,8 @@
 <body>
 
 <div class="navbar">
+	<!-- <img src="assets/logo6.png" class="navbar_logo"> -->
+	<%= image_tag("logo6.png", class: "navbar_logo") %>
 	<ul>
 		<li><%= link_to 'All Current Deals', '/'%></li>
 		<% if session[:user_id] %>
